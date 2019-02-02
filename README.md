@@ -1,1 +1,1 @@
-# Minnehack2019
+# Minnehack2019 :: TEAM 🌽
