@@ -1,8 +1,10 @@
 from flask import Flask, jsonify, request, abort
+from flask_cors import CORS, cross_origin
 import psycopg2
 from Database import Database
 
 app = Flask(__name__)
+CORS(app)
 
 database = Database()
 database.connect()
