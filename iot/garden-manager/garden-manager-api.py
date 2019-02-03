@@ -1,8 +1,7 @@
 from flask import Flask, jsonify, request, abort
-from flask_cors import CORS, cross_origin
 import psycopg2
 from Database import Database
-
+from flask_cors import CORS, cross_origin
 app = Flask(__name__)
 CORS(app)
 
@@ -47,18 +46,26 @@ def completeTask():
 
 @app.route('/users/userData/<int:user_id>', methods=['GET'])
 def getUserData(user_id):
-    return database.getUser(user_id)
+    return jsonify({"user": database.getUser(user_id)})
 
-#@app.route('/users/id/<int:rfid_number>', methods=['GET'])
-#def getUserIdByRFID(rfid_number):
-#    pass
-#    return getUserIdFromDatabase(rfid_number)
+@app.route('/users/id/<int:rfid_number>', methods=['GET'])
+def getUserIdByRFID(rfid_number):
+    return jsonify({"user": database.getUserIdByRfid(rfid_number)})
 
-#@app.route('/taskHistory/tasks/<int:user_id>', methods=['GET'])
-#def getTaskHistoryById(user_id):
-#    return getTaskHistoryFromDatabase(user_id)
+@app.route('/tasks/history/<int:user_id>', methods=['GET'])
+def getTaskHistoryById(user_id):
+    return jsonify({"history": database.getTaskHistory(user_id)})
 
+@app.route('/auctions/auctions', methods=['GET'])
+def getActiveAuctions():
+    return jsonify({"auctions": database.getAuctions()})
+
+@app.route('/auctions/bid', methods=['POST'])
+def bid():
+    if not request.json:
+        abort(400)
+    database.bid(request.json['auction'], request.json['ammount'], request.json['user'])
+    return ("", 201,)
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=80)
-
 
