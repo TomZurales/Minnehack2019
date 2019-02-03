@@ -12,17 +12,18 @@ import {
   MatListModule,
   MatNativeDateModule,
   MatSidenavModule,
+  MatTableModule,
   MatToolbarModule,
 } from '@angular/material';
 import {CommonModule} from '@angular/common';
-import {AccountComponent} from './account/account.component';
 import {TasksComponent} from './tasks/tasks.component';
 import {HomeComponent} from './home/home.component';
 import {HttpClientModule} from '@angular/common/http';
+import {AuctionComponent} from './auction/auction.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent, data: {title: 'Home'}},
-  {path: 'my_account', component: AccountComponent, data: {title: 'My Account'}},
+  {path: 'auction', component: AuctionComponent, data: {title: 'Auction'}},
   {path: 'tasks', component: TasksComponent, data: {title: 'Tasks'}}
 ];
 
@@ -30,15 +31,16 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     NavigationComponent,
-    AccountComponent,
     TasksComponent,
-    HomeComponent
+    HomeComponent,
+    AuctionComponent
   ],
   imports: [
     CommonModule,
     HttpClientModule,
     MatButtonModule,
     MatToolbarModule,
+    MatTableModule,
     MatNativeDateModule,
     MatIconModule,
     MatSidenavModule,

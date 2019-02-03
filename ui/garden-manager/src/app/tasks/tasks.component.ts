@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {RestService, Task} from '../rest.service';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-tasks',
@@ -8,15 +9,15 @@ import {RestService, Task} from '../rest.service';
 })
 export class TasksComponent implements OnInit {
 
-  private tasks: Task[];
+  dataSource: Observable<Task[]>;
+  tableColumns: string[] = ['name', 'value'];
 
   constructor(private restService: RestService) {
   }
 
   ngOnInit() {
-    this.restService.getTasks().subscribe((data: any) => {
-      this.tasks = data['tasks'];
-      console.log(this.tasks);
+    this.restService.getTasks().subscribe((result) => {
+      this.dataSource = result.tasks;
     });
   }
 

@@ -1,0 +1,26 @@
+<div>
+  <table mat-table [dataSource]="dataSource" style="width: 80%;">
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Item </th>
+      <td mat-cell *matCellDef="let auction"> {{auction.name}}</td>
+    </ng-container>
+    <ng-container matColumnDef="current_bid">
+      <th mat-header-cell *matHeaderCellDef> Current Bid </th>
+      <td mat-cell *matCellDef="let auction"> {{auction['current_bid']}}</td>
+    </ng-container>
+    <ng-container matColumnDef="highest_bidder">
+      <th mat-header-cell *matHeaderCellDef> Highest Bidder </th>
+      <td mat-cell *matCellDef="let auction"> {{auction['highest_bidder']}}</td>
+    </ng-container>
+    <ng-container matColumnDef="end_date">
+      <th mat-header-cell *matHeaderCellDef> Auction Ends </th>
+      <td mat-cell *matCellDef="let auction"> {{auction['end_date']}}</td>
+    </ng-container>
+    <ng-container matColumnDef="bid_button">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let auction"><button mat-raised-button color="accent" type="button" (click)="refresh()">Place Bid</button></td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
+  </table>
+</div>

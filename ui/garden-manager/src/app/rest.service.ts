@@ -15,6 +15,14 @@ export class RestService {
     return this.http.get(this.REST_URL + '/tasks/tasks');
   }
 
+  getAuctions(): Observable<any> {
+    return this.http.get(this.REST_URL + '/auctions/auctions');
+  }
+
+  // placeBid(): {
+  //   this.http.post();
+  // }
+
   getTaskHistory(userID: number): Observable<any> {
     return this.http.get(this.REST_URL + '/tasks/history?id=' + userID);
   }
@@ -26,5 +34,13 @@ export class Task {
   name: string;
   interval: number;
   lastCompleted: Date;
+  id: number;
+}
+
+export class Auction {
+  itemName: string;
+  currentBid: number;
+  highestBidder: string;
+  endDate: Date;
   id: number;
 }
