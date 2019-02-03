@@ -34,6 +34,9 @@ def completeTask():
 # def getTaskHistoryById(user_id):
 #     return getTaskHistoryFromDatabase(user_id)
 
+if __name__ == '__main__':
+    app.run(debug=True)
+
 def getTasksFromDatabase():
     return jsonify({"tasks": database.getTasks()})
 
