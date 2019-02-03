@@ -1,5 +1,6 @@
 import psycopg2
 from dbconfig import config
+from datetime import datetime, timedelta
 
 class Database:
     conn = None
@@ -26,12 +27,30 @@ class Database:
         print('Database connection closed.')
 
     def getTasks(self):
-        self.cur.execute('SELECT * FROM Tasks LIMIT 10')
-        tasks = self.cur.fetchone()
-        print(tasks)
+        self.cur.execute('SELECT * FROM Tasks ORDER BY value')
+        tasks = self.cur.fetchall()
+        tasksArr = []
+        for task in tasks:
+            date = task[3]
+            taskDict = dict() 
+            taskDict['name'] = task[1]
+            taskDict['value'] = task[0]
+            if (date + timedelta(days=task[2])) <= datetime.today().date():
+                tasksArr.append(taskDict)
+        return tasksArr
 
     def addTaskToTaskHistory(self, finishedTask):
+        print(finishedTask)
         sql = "INSERT INTO task_history(task_id, completed, user_id) VALUES(%s,%s,%s);"
         self.cur.execute(sql, (finishedTask["task_id"], finishedTask["completed"], finishedTask["user_id"]))
         self.conn.commit()
-        print("HERE")
+    def updateTaskDate(self, taskId):
+        date = datetime.today().date()
+        sql = "UPDATE tasks SET last_completed = %s WHERE id = %s"
+        self.cur.execute(sql, (date, taskId))
+        self.conn.commit()
+    def addCreditsToUser(self, userId, value):
+        sql = "UPDATE users SET balance = balance + %s WHERE id = %s"
+        self.cur.execute(sql, (value, userId))
+        self.conn.commit()
+    
