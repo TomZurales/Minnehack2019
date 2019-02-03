@@ -2,3 +2,4 @@ Adafruit-Blinka
 adafruit-circuitpython-busdevice
 pyserial
 PyQt5==5.9.2
+gobject-introspection
