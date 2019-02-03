@@ -43,10 +43,9 @@ def completeTask():
     addCreditsToUser(finishedTask["user_id"], request.json["value"])
     return ("",201,)
 
-#@app.route('/users/userData/<int:user_id>', methods=['GET'])
-#def getUserData(user_id):
-#    pass
-#    return getUserFromDatabase(user_id)
+@app.route('/users/userData/<int:user_id>', methods=['GET'])
+def getUserData(user_id):
+    return database.getUser(user_id)
 
 #@app.route('/users/id/<int:rfid_number>', methods=['GET'])
 #def getUserIdByRFID(rfid_number):

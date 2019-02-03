@@ -53,4 +53,8 @@ class Database:
         sql = "UPDATE users SET balance = balance + %s WHERE id = %s"
         self.cur.execute(sql, (value, userId))
         self.conn.commit()
-    
+   def getUser(self, userId):
+       sql = "SELECT * FROM users WHERE id = &s"
+       self.cur.execute(sql, (userId))
+       self.conn.commit()
+
