@@ -11,12 +11,13 @@ export class TasksComponent implements OnInit {
   private tasks: Task[];
 
   constructor(private restService: RestService) {
-    this.restService.getTasks().subscribe((data: Task[]) => {
-      this.tasks = data;
-    });
   }
 
   ngOnInit() {
+    this.restService.getTasks().subscribe((data: any) => {
+      this.tasks = data['tasks'];
+      console.log(this.tasks);
+    });
   }
 
 }
