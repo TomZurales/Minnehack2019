@@ -34,3 +34,4 @@ class Database:
         sql = "INSERT INTO task_history(task_id, completed, user_id) VALUES(%s,%s,%s);"
         self.cur.execute(sql, (finishedTask["task_id"], finishedTask["completed"], finishedTask["user_id"]))
         self.conn.commit()
+        print("HERE")
