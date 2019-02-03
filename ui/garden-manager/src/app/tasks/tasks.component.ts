@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {RestService, Task} from '../rest.service';
 
 @Component({
   selector: 'app-tasks',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TasksComponent implements OnInit {
 
-  constructor() { }
+  private tasks: Task[];
+
+  constructor(private restService: RestService) {
+    this.restService.getTasks().subscribe((data: Task[]) => {
+      this.tasks = data;
+    });
+  }
 
   ngOnInit() {
   }

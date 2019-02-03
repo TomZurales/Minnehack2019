@@ -12,14 +12,16 @@ import {
   MatListModule,
   MatNativeDateModule,
   MatSidenavModule,
-  MatToolbarModule
+  MatToolbarModule,
 } from '@angular/material';
 import {CommonModule} from '@angular/common';
 import {AccountComponent} from './account/account.component';
 import {TasksComponent} from './tasks/tasks.component';
+import {HomeComponent} from './home/home.component';
+import {HttpClientModule} from '@angular/common/http';
 
 const appRoutes: Routes = [
-  {path: '', component: AccountComponent, data: {title: 'My Account'}},
+  {path: '', component: HomeComponent, data: {title: 'Home'}},
   {path: 'my_account', component: AccountComponent, data: {title: 'My Account'}},
   {path: 'tasks', component: TasksComponent, data: {title: 'Tasks'}}
 ];
@@ -29,10 +31,12 @@ const appRoutes: Routes = [
     AppComponent,
     NavigationComponent,
     AccountComponent,
-    TasksComponent
+    TasksComponent,
+    HomeComponent
   ],
   imports: [
     CommonModule,
+    HttpClientModule,
     MatButtonModule,
     MatToolbarModule,
     MatNativeDateModule,
