@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +11,11 @@ export class RestService {
   constructor(private http: HttpClient) {
   }
 
-  getTasks() {
+  getTasks(): Observable<any> {
     return this.http.get(this.REST_URL + '/tasks/tasks');
   }
 
-  getTaskHistory(userID: number) {
+  getTaskHistory(userID: number): Observable<any> {
     return this.http.get(this.REST_URL + '/tasks/history?id=' + userID);
   }
 }
